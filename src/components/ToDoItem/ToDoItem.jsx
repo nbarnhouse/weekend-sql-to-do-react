@@ -16,11 +16,25 @@ export default function ToDoItem({ listData, fetchTodosCallback}) {
             console.error('ERROR:', err);
           });
       };
+
+    const handleCheckboxChange = () => {
+
+      const newCompletedStatus = !listData.completed;
+
+      // Make Axios Call to update status
+      axios.put(`/api/todo/${listData.id}`, { completed: newCompletedStatus })
+        .then((response) => {
+          fetchTodosCallback();
+        })
+        .catch((err) => {
+          console.error('ERROR:', err);
+        });
+    };  
     
     return (
         <>
         <div className="form-input">
-            <input type="checkbox"></input>
+            <input type="checkbox" checked={listData.completed} onChange={handleCheckboxChange}></input>
             <p>{listData.item}</p>
             <p>{listData.notes}</p>
             <button

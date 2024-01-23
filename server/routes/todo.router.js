@@ -3,7 +3,7 @@ const pool = require('../modules/pool.js');
 
 // GET
 router.get('/', (req, res) => {
-    const dbQuery = 'SELECT * FROM "todo";';
+    const dbQuery = 'SELECT * FROM "todo" ORDER BY id;';
   
     pool
       .query(dbQuery)
@@ -22,12 +22,11 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const newData = req.body;
     console.log(`New ToDo: ${newData}`);
-    const queryText = `INSERT INTO "todo" ("item", "due", "notes")
+    const queryText = `INSERT INTO "todo" ("item", "notes")
     VALUES
-      ($1, $2, $3);`;
+      ($1, $2);`;
     const queryArgs = [
       newData.item,
-      newData.due,
       newData.notes,
     ];
   
@@ -50,10 +49,10 @@ router.put('/:id', (req, res) => {
     
     console.log(`Update To Do: ${todoData}`);
     
-    const queryText = `UPDATE "todo" SET "item" = $1, "due" = $2, "notes" = $3 WHERE "id" = $4;`;
+    const queryText = `UPDATE "todo" SET "completed" = $1 WHERE "id" = $2;`;
     
     pool
-    .query(queryText, [todoData.item, todoData.due, todoData.notes, id])
+    .query(queryText, [todoData.completed, id])
     .then((result) => {
       res.sendStatus(200);
     })
