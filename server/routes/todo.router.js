@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     pool
       .query(dbQuery)
       .then((result) => {
-        console.log('RESULT', result);
+        console.log('Return ToDos', result);
         res.send(result.rows);
       })
       .catch((err) => {
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 // POST
 router.post('/', (req, res) => {
     const newData = req.body;
-    console.log(`NewTreat: ${newData}`);
+    console.log(`New ToDo: ${newData}`);
     const queryText = `INSERT INTO "todo" ("item", "due", "notes")
     VALUES
       ($1, $2, $3);`;
@@ -48,7 +48,7 @@ router.put('/:id', (req, res) => {
     const id = req.params.id;
     const todoData = req.body;
     
-    console.log(`Put Output: ${todoData}`);
+    console.log(`Update To Do: ${todoData}`);
     
     const queryText = `UPDATE "todo" SET "item" = $1, "due" = $2, "notes" = $3 WHERE "id" = $4;`;
     

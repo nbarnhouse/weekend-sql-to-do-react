@@ -1,29 +1,57 @@
-import { useState } from "react"
+//Form input fields go in this file but the 
 
-export function NewTodoForm({ onSubmit }) {
-    const [newItem, setNewItem] = useState("")
-  
-    function handleSubmit(e) {
-      e.preventDefault()
-      if (newItem === "") return
-  
-      onSubmit(newItem)
-  
-      setNewItem("")
-    }
+import { useState } from "react";
+import axios from "axios";
+
+export default function TodoForm({ fetchTodosCallback }) {
+
+  const [todoItemName, setTodoItemName] = useState('');
+  const [todoItemDate, setTodoItemDate] = useState('');
+  const [todoItemNotes, setTodoItemNotes] = useState('');
+
+
+  //need to add handle submit function
+  const todoHandleSubmit = (evt) => {
+    evt.preventDefault();
+        
+       let itemToAdd = {
+        item: todoItemName,
+        due: todoItemDate,
+        notes: todoItemNotes
+      };
+
+      // TODO: create POST request to add this new item to the database
+
+       return axios.post('/api/todo', itemToAdd)
+      .then(() => {
+        fetchTodosCallback();
+        setTodoItemName('');
+        setTodoItemDate('');
+        setTodoItemNotes('');
+      })
+      .catch((err) => {
+        console.error('ERROR:', err);
+      });
+  };
 
     return (
-        <form onSubmit={handleSubmit} className="new-item-form">
-          <div className="form-row">
-            <label htmlFor="item">New Item</label>
-            <input
-              value={newItem}
-              onChange={event => setNewItem(event.target.value)}
-              type="text"
-              id="item"
-            />
-          </div>
-          <button className="btn">Add</button>
+      <>
+        <div className="formHeading">
+          <h2>Add Items</h2>
+        </div>
+       <form onSubmit={todoHandleSubmit}>
+          <label htmlFor="item-input">New Item:</label>
+          <input id="item-input" onChange={e => setTodoItemName(e.target.value)} 
+          value={todoItemName}/>
+          <label htmlFor="date-input">Due Date:</label>
+          <input type="date" id="date-input" onChange={e => setTodoItemDate(e.target.value)} 
+          value={todoItemDate}/>
+          <label htmlFor="notes-input">Notes:</label>
+          <input id="notes-input" onChange={e => setTodoItemNotes(e.target.value)} 
+          value={todoItemNotes}/>
+          <button type="submit">Add</button>
         </form>
+    </>   
+
       )
-    }
+    };

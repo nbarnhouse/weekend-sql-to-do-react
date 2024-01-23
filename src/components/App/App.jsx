@@ -1,45 +1,42 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
+
 import './App.css';
+import ToDoList from "../ToDoList/ToDoList";
+import TodoForm from "../TodoForm/TodoForm";
+import Header from "../Header/Header";
+import axios from "axios";
 
 export default function App () {
-  const [item, setItem] = useState('');
+  let [toDoItemList, settoDoItemList] = useState([]);
 
+  //initial load of component
+  useEffect(() => {
+    // body of effect
+    console.log('Hello');
+    // api call
+    fetchToDos();
+  }, []);
 
-
-
-  function checkItem(id, completed) {
-    setItem(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed }
-        }
-        return todo
-      })
+  const fetchToDos = () => {
+    // TODO: fetch the list of items from the server
+    return axios.get('/api/todo')
+    .then((response) => {
+      console.log('SERVER DATA:', response);
+      settoDoItemList(response.data);
     })
-  }
+    // failure
+    .catch((err) => {
+      console.error('ERROR:', err);
+    });
+  };
 
-  function deleteItem(id) {
-    setItem(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
-    })
-  }
-  
   return (
-    <form className="form">
-    <div className="row">
-      <h1>To Do App Checklist</h1>
-      <label htmlFor="item">New Item</label>
-      <input type="text" id="item" />
-      <button>Add</button>
-
-      <h2>To Do List</h2>
-      <input type="checkbox" id="checkbox"></input>
-      <h3>Do Laundry</h3>
-      <button>Delete</button>
-      
+    <div className="textArea">
+      <Header />
+      <TodoForm fetchTodosCallback={fetchToDos}/>
+      <ToDoList toDoItemList={toDoItemList}
+      fetchTodosCallback={fetchToDos}/>
     </div>
-    </form>
-
   );
 
 }
