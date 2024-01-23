@@ -7,4 +7,6 @@ CREATE TABLE "todo" (
 
 INSERT INTO todo ("item" "notes")
 VALUES 
-('Clean out car', 'Buy tire cleaner and start on Saturday');
+('Clean out car', 'Buy tire cleaner and start on Saturday'), 
+('Wash the car', 'Get husband and kids to do it on Saturday!'),
+('Finish Homework Assignments', 'Make sure you start on Thursday');
