@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import axios from "axios";
+import './TodoForm.css';
 
 export default function TodoForm({ fetchTodosCallback }) {
 
   const [todoItemName, setTodoItemName] = useState('');
-  const [todoItemDate, setTodoItemDate] = useState('');
   const [todoItemNotes, setTodoItemNotes] = useState('');
 
 
@@ -16,7 +16,6 @@ export default function TodoForm({ fetchTodosCallback }) {
         
        let itemToAdd = {
         item: todoItemName,
-        due: todoItemDate,
         notes: todoItemNotes
       };
 
@@ -26,7 +25,6 @@ export default function TodoForm({ fetchTodosCallback }) {
       .then(() => {
         fetchTodosCallback();
         setTodoItemName('');
-        setTodoItemDate('');
         setTodoItemNotes('');
       })
       .catch((err) => {
@@ -43,9 +41,6 @@ export default function TodoForm({ fetchTodosCallback }) {
           <label htmlFor="item-input">New Item:</label>
           <input id="item-input" onChange={e => setTodoItemName(e.target.value)} 
           value={todoItemName}/>
-          <label htmlFor="date-input">Due Date:</label>
-          <input type="date" id="date-input" onChange={e => setTodoItemDate(e.target.value)} 
-          value={todoItemDate}/>
           <label htmlFor="notes-input">Notes:</label>
           <input id="notes-input" onChange={e => setTodoItemNotes(e.target.value)} 
           value={todoItemNotes}/>

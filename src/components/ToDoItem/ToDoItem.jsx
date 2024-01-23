@@ -1,4 +1,5 @@
 import axios from "axios";
+import './TodoItem.css';
 
 export default function ToDoItem({ listData, fetchTodosCallback}) {
     
@@ -21,7 +22,6 @@ export default function ToDoItem({ listData, fetchTodosCallback}) {
         <div className="form-input">
             <input type="checkbox"></input>
             <p>{listData.item}</p>
-            <p>{listData.due}</p>
             <p>{listData.notes}</p>
             <button
             onClick={(event) => {

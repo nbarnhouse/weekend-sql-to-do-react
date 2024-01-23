@@ -1,0 +1,13 @@
+.form-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form-input p {
+    margin: 0;
+}
+
+.form-input input[type="checkbox"]:checked ~ p {
+    text-decoration: line-through;
+}

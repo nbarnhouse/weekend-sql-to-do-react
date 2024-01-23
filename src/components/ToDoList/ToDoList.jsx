@@ -11,7 +11,7 @@ export default function ToDoList({ toDoItemList, fetchTodosCallback }) {
     return (
         <>
         <h2>To Do List</h2>
-
+        <div className="todo-list-container">
         <ul>
         {toDoItemList.map((listData) => {
         return (
@@ -23,24 +23,8 @@ export default function ToDoList({ toDoItemList, fetchTodosCallback }) {
         );
       })}
     </ul>
+    </div>
     </>
     )
 }
 
-
-
-
-{/* <ul>
-{toDoItemList.map((item, id) => {
-return (
-<div key={id}>
-    <input type="checkbox"></input>
-    <p>{item.item}</p>
-    <p>{item.due}</p>
-    <p>{item.notes}</p>
-    <button>Delete</button>
-</div>
-
-);
-})}
-</ul> */}
