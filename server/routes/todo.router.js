@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
     console.log(`New ToDo: ${newData}`);
     const queryText = `INSERT INTO "todo" ("item", "due", "notes")
     VALUES
-      ($1, $2);`;
+      ($1, $2, $3);`;
     const queryArgs = [
       newData.item,
       newData.due,

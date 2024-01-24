@@ -5,6 +5,7 @@ import ToDoList from "../ToDoList/ToDoList";
 import TodoForm from "../TodoForm/TodoForm";
 import Header from "../Header/Header";
 import axios from "axios";
+import { DateTime } from "luxon";
 
 export default function App () {
   let [toDoItemList, settoDoItemList] = useState([]);
@@ -15,7 +16,8 @@ export default function App () {
     console.log('Hello');
     // api call
     fetchToDos();
-  }, []);
+    }, []);
+
 
   const fetchToDos = () => {
     // TODO: fetch the list of items from the server
@@ -29,6 +31,9 @@ export default function App () {
       console.error('ERROR:', err);
     });
   };
+
+  // const dt = DateTime.local();
+  // console.log(dt.toFormat('MM-dd-yyyy'));
 
   return (
     <div className="textArea">

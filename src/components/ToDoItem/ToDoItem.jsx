@@ -1,5 +1,6 @@
 import axios from "axios";
 import './TodoItem.css';
+import { DateTime } from "luxon";
 
 export default function ToDoItem({ listData, fetchTodosCallback}) {
     
@@ -30,12 +31,16 @@ export default function ToDoItem({ listData, fetchTodosCallback}) {
           console.error('ERROR:', err);
         });
     };  
+
+    //const dt = DateTime.local();
+    // console.log(dt.toFormat('MM-dd-yyyy'));
     
     return (
         <>
         <div className="form-input">
             <input type="checkbox" checked={listData.completed} onChange={handleCheckboxChange}></input>
             <p>{listData.item}</p>
+            <p>{DateTime.fromISO(listData.due).toFormat('MM-dd-yyyy')}</p>
             <p>{listData.notes}</p>
             <button
             onClick={(event) => {
