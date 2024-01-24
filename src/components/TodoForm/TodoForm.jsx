@@ -14,10 +14,12 @@ export default function TodoForm({ fetchTodosCallback }) {
   //need to add handle submit function
   const todoHandleSubmit = (evt) => {
     evt.preventDefault();
+
+    console.log(todoItemDate);
         
        let itemToAdd = {
         item: todoItemName,
-        date: todoItemDate,
+        due: todoItemDate,
         notes: todoItemNotes
       };
 
