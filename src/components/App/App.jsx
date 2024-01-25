@@ -49,44 +49,39 @@ export default function App () {
 }
 
 
-//npm install react-router-dom to get a version use @ and the number 5 or 5.1.3
-// import { HashRouter as Router, Route, Link } from 'react-router-dom';
-//At top of file, import all these pages 
+// //npm install react-router-dom to get a version use @ and the number 5 or 5.1.3
+// // import { HashRouter as Router, Route, Link } from 'react-router-dom';
+// //At top of file, import all these pages 
 
-//this block of text goes in the return area
-//Component Pages go Inside
+// //this block of text goes in the return area
+// //Component Pages go Inside
 
+// <main>
+//   <Router>
 
+// <ul>
+//   <li>
+//     <Link to="/" >Home</Link>
+//   </li>
+//   <li>
+//     <Link to="/about">About</Link>
+//   </li>
+//   <li>
+//     <Link t ="/contact">Contact</Link>
+//   </li>
+// </ul>
 
-
-
-<main>
-  <Router>
-
-<ul>
-  <li>
-    <Link to="/" >Home</Link>
-  </li>
-  <li>
-    <Link to="/about">About</Link>
-  </li>
-  <li>
-    <Link t ="/contact">Contact</Link>
-  </li>
-</ul>
-
-  <Route path="/" exact>
-    <Home />
-  </Route>
-  <Route path="/about">
-    <About />
-  </Route>
-  <Route path="/contact">
-    <Contact />
-  </Route>
-  </Router>
-</main>
+//   <Route path="/" exact>
+//     <Home />
+//   </Route>
+//   <Route path="/about">
+//     <About />
+//   </Route>
+//   <Route path="/contact">
+//     <Contact />
+//   </Route>
+//   </Router>
+// </main>
 
 
-//Need to register the route
-
+// //Need to register the route
