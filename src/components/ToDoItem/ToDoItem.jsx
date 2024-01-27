@@ -32,6 +32,7 @@ export default function ToDoItem({ listData, fetchTodosCallback}) {
         });
     };  
 
+    //Generic format testing
     //const dt = DateTime.local();
     // console.log(dt.toFormat('MM-dd-yyyy'));
     
