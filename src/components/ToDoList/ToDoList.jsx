@@ -1,34 +1,45 @@
-//Need GET function in this file to pull in the list data
-import ToDoItem from '../ToDoItem/ToDoItem';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-
-
-
+import { useSelector } from "react-redux";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import './ToDoList.css';
 
-export default function ToDoList({ toDoItemList, fetchTodosCallback }) {
+export default function ToDoList() {
+  const elementList = useSelector((state) => state.toDoElement);
 
-  //handling submit goes in this file
-
-
+  if (elementList.length === 0) {
     return (
-        <>
-        <h2>To Do List</h2>
+      <p>
+        <i>You are all caught up!</i>
+      </p>
+    );
+  }
 
-        {/* <Box>
-        <Grid container>
-        {toDoItemList.map(listData => (
-          <Grid item key={listData.id} xs={12}>
-            <ToDoItem 
-            listData={listData}
-            fetchTodosCallback={fetchTodosCallback}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      </Box> */}
-    </>
-  )
+  //Need to add GET call back in
+
+  return (
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>To Do List</TableCell>
+            {/* Add more table headers if needed */}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {elementList.map((element, itemIndex) => (
+            <TableRow key={itemIndex}>
+              <TableCell>{element.item}</TableCell>
+              <TableCell>{element.due}</TableCell>
+              <TableCell>{element.notes}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
-

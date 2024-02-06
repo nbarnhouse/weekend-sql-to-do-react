@@ -1,33 +1,42 @@
 //Form input fields go in this file but the 
-
+import { useDispatch } from 'react-redux';
 import { useState } from "react";
 import axios from "axios";
 import './TodoForm.css';
 
-export default function TodoForm({ fetchTodosCallback }) {
+export default function TodoForm() {
 
   const [todoItemName, setTodoItemName] = useState('');
   const [todoItemDate, setTodoItemDate] = useState('');
   const [todoItemNotes, setTodoItemNotes] = useState('');
 
+  const dispatch = useDispatch();
 
-  //need to add handle submit function
-  const todoHandleSubmit = (evt) => {
-    evt.preventDefault();
+  const itemToAdd = {
+    item: todoItemName,
+    due: todoItemDate,
+    notes: todoItemNotes,
+  };
 
-    console.log(todoItemDate);
-        
-       let itemToAdd = {
-        item: todoItemName,
-        due: todoItemDate,
-        notes: todoItemNotes
-      };
+  const todoHandleSubmit = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'ELEMENT_TODO_ADD',
+      payload: itemToAdd,
+    });
+
+
+  //Don't think I need this since it is called out next to the input fields.
+  // //need to add handle submit function
+  // const handleToDoAdd = (event) => {
+  //   setTodoItemName(event.target.value);
+  //   setTodoItemDate(event.target.value);
+  //   setTodoItemNotes(event.target.value);
+  // };
 
       // TODO: create POST request to add this new item to the database
-
-       return axios.post('/api/todo', itemToAdd)
+  axios.post('/api/todo', itemToAdd)
       .then(() => {
-        fetchTodosCallback();
         setTodoItemName('');
         setTodoItemDate('');
         setTodoItemNotes('');
