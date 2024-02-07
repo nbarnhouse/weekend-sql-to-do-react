@@ -38,9 +38,9 @@ export default function App () {
   return (
     <div className="textArea">
       <Header />
-      <TodoForm fetchTodosCallback={fetchToDos}/>
+      {/* <TodoForm fetchTodosCallback={fetchToDos}/>
       <ToDoList toDoItemList={toDoItemList}
-      fetchTodosCallback={fetchToDos}/>
+      fetchTodosCallback={fetchToDos}/> */}
     </div>
   );
 
