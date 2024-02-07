@@ -1,6 +1,8 @@
 import axios from "axios";
 import './TodoItem.css';
 import { DateTime } from "luxon";
+import Checkbox from '@mui/material/Checkbox';
+import Card from "@mui/material/Card";
 
 export default function ToDoItem({ listData, fetchTodosCallback}) {
     
@@ -32,12 +34,14 @@ export default function ToDoItem({ listData, fetchTodosCallback}) {
         });
     };  
 
+    //Generic format testing
     //const dt = DateTime.local();
     // console.log(dt.toFormat('MM-dd-yyyy'));
     
     return (
         <>
         <div className="form-input">
+          <Card>
             <input type="checkbox" checked={listData.completed} onChange={handleCheckboxChange}></input>
             <p>{listData.item}</p>
             <p>{DateTime.fromISO(listData.due).toFormat('MM-dd-yyyy')}</p>
@@ -47,8 +51,9 @@ export default function ToDoItem({ listData, fetchTodosCallback}) {
             event.preventDefault();
             handleClickDelete(listData.id);
           }}>Delete</button>
+          </Card>
         </div>
-        </>
+       </>
 
     )
 }
